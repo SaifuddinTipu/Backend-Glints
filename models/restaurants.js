@@ -137,7 +137,6 @@ restaurantsSchema.statics.searchRestaurants = async function (name) {
             var obj = {};
             obj['_id'] = element._id;
             obj['restaurantName'] = element.restaurantName;
-            obj['menu'] = element.menu;
             restaurants.push(obj);
         }); 
         return restaurants;
