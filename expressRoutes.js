@@ -5,8 +5,8 @@ const expressRoutes = async (appExpress) => {
   appExpress.use(function (req, res, next) {
     next();
   });
-  appExpress.use(`${url}/api/users`, users);
-  appExpress.use(`${url}/api/restaurants`, restaurants);
+  appExpress.use(`${url}:${process.env.PORT}/api/users`, users);
+  appExpress.use(`${url}:${process.env.PORT}/api/restaurants`, restaurants);
 };
 
 module.exports = expressRoutes;
