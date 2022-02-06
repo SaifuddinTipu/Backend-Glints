@@ -110,7 +110,6 @@ restaurantsSchema.statics.getTopRestaurants = async function (max_numof_restaura
             var obj = {};
             obj['_id'] = element._id;
             obj['restaurantName'] = element.restaurantName;
-            obj['menu'] = element.menu;
             restaurants.push(obj);
         });  
         
