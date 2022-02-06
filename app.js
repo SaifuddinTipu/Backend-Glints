@@ -40,7 +40,7 @@ const onListening = () => {
   console.log("Listening on" + bind);
 };
 
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(Process.env.PORT || "3000");
 
 const server = http.createServer(appExpress);
 
