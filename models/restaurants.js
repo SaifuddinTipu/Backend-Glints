@@ -74,16 +74,28 @@ restaurantsSchema.statics.getRestaurants = async function (dayNo, reqtime) {
 restaurantsSchema.statics.getTopRestaurants = async function (max_numof_restaurants, unit, dish_quantity, min_price, max_price) {
     try {
         let restaurants = [];
-        console.log(typeof Number(min_price));
+        let expression;
+        // console.log(typeof Number(min_price));
         if(unit == 'more-than') {
             unit = '>';
+            expression = {
+                $gt:[{
+                    $size:"$menu"
+                }, dish_quantity]
+            };
         } else if(unit == 'less-than') {
             unit = '<';
+            expression = {
+                $lt:[{
+                    $size:"$menu"
+                }, dish_quantity]
+            };
         }
+
         const restaurantsdb = await Restaurants.find(
             { 
-                $where: `this.menu.length ${unit} ${dish_quantity}`,
-                'menu': {
+                $expr: expression,
+                menu: {
                     $elemMatch: {
                         'price': {
                             $gte: Number(min_price),
@@ -91,7 +103,6 @@ restaurantsSchema.statics.getTopRestaurants = async function (max_numof_restaura
                         }
                     }
                 }
-
             }
         ).limit(max_numof_restaurants);
         // console.log(restaurantsdb);
@@ -99,6 +110,7 @@ restaurantsSchema.statics.getTopRestaurants = async function (max_numof_restaura
             var obj = {};
             obj['_id'] = element._id;
             obj['restaurantName'] = element.restaurantName;
+            obj['menu'] = element.menu;
             restaurants.push(obj);
         });  
         

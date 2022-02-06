@@ -57,9 +57,9 @@ const list_top_restaurants = async (req, res, next) => {
 }
 
 const search_restaurants = async (req, res, next) => {
-    try {
+    try { 
         const schema = Joi.object({
-            name: Joi.number().required()
+            name: Joi.string().required()
         });
 
         const options = {
