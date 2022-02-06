@@ -8,7 +8,7 @@ exports.list_all_restaurants = async (req, res, next) => {
 
         var dayNo =  moment(time).day();
         var reqtime = moment(time);
-        // console.log(dayNo, reqtime);
+        console.log(dayNo, reqtime);
         const restaurants = await Restaurants.getRestaurants(dayNo, reqtime);
 
         return res.status(200).json({

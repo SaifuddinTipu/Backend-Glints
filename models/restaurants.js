@@ -53,9 +53,11 @@ restaurantsSchema.statics.getRestaurants = async function (dayNo, reqtime) {
         restaurantsdb.forEach(element => {
             var openAt = moment(element.openingHours[0].openAt, ["h:mm A"]);
             var closeAt = moment(element.openingHours[0].closeAt, ["h:mm A"]);
+            openAt = openAt.date(reqtime.date());
+            closeAt = closeAt.date(reqtime.date());
             // console.log(element, reqtime, openAt, closeAt);
             if (reqtime >= openAt && reqtime <= closeAt) {
-                // console.log(currentTime, startTime, endTime);
+                // console.log(reqtime, openAt, closeAt);
                 var obj = {};
                 obj['_id'] = element._id;
                 obj['restaurantName'] = element.restaurantName;
