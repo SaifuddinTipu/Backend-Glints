@@ -44,10 +44,11 @@ const port = normalizePort(process.env.APP_PORT || "3000");
 
 const server = http.createServer(appExpress);
 
+const MONGODB_URL="mongodb+srv://saifuddin:saifuddin123@glints-backend.luubp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 mongoose
   .connect(
-    `${process.env.MONGODB_URL}`,
+    `${MONGODB_URL}`,
     {
       useNewUrlParser:true,
       useUnifiedTopology: true
